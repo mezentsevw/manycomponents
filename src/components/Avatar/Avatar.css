@@ -1,0 +1,133 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  color: #666;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+/* Размеры */
+.avatar.sm {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.avatar.md {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.avatar.lg {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.avatar.xl {
+  width: 64px;
+  height: 64px;
+  font-size: 24px;
+}
+
+/* Формы */
+.avatar.circle {
+  border-radius: 50%;
+}
+
+.avatar.square {
+  border-radius: 4px;
+}
+
+/* Изображение */
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Инициалы */
+.avatar-initials {
+  text-transform: uppercase;
+}
+
+/* Статусы */
+.avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.status-online .avatar-status {
+  background-color: #4caf50;
+}
+
+.status-offline .avatar-status {
+  background-color: #9e9e9e;
+}
+
+.status-away .avatar-status {
+  background-color: #ff9800;
+}
+
+/* Демо-компонент */
+.avatar-demo {
+  padding: 20px;
+}
+
+.avatar-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.avatar-demo h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.avatar-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.avatar-demo-group {
+  margin-bottom: 20px;
+}
+
+.avatar-demo-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Интерактивность */
+.avatar[role="button"] {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.avatar[role="button"]:hover {
+  opacity: 0.8;
+}
+
+.avatar[role="button"]:focus {
+  outline: 2px solid #2196f3;
+  outline-offset: 2px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .avatar-demo-row {
+    flex-wrap: wrap;
+  }
+} 

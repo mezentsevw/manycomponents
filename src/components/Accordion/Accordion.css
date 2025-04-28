@@ -1,0 +1,125 @@
+.accordion {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.accordion.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.accordion-header:hover:not(:disabled) {
+  background-color: #e9ecef;
+}
+
+.accordion-header:disabled {
+  cursor: not-allowed;
+  background-color: #f8f9fa;
+}
+
+.accordion-header:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.accordion-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: #333;
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+  color: #666;
+  font-size: 14px;
+}
+
+.accordion-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.accordion-custom-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.accordion-content {
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.accordion-content-inner {
+  padding: 20px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.accordion-demo {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.accordion-demo h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.accordion-demo h3 {
+  color: #444;
+  margin: 30px 0 15px;
+  font-size: 18px;
+}
+
+/* Анимации */
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 1000px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    max-height: 1000px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.accordion-content.expanded {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.accordion-content:not(.expanded) {
+  animation: slideUp 0.3s ease-out forwards;
+} 

@@ -1,0 +1,191 @@
+.button-group {
+  display: inline-flex;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.button-group.horizontal {
+  flex-direction: row;
+}
+
+.button-group.vertical {
+  flex-direction: column;
+}
+
+.button-group-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Размеры */
+.button-group-item.sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.button-group-item.md {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.button-group-item.lg {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+/* Варианты */
+.button-group.contained .button-group-item {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.button-group.outlined .button-group-item {
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+}
+
+.button-group.text .button-group-item {
+  background-color: transparent;
+  border: none;
+}
+
+/* Цвета */
+.button-group-item.primary {
+  color: #007bff;
+}
+
+.button-group-item.secondary {
+  color: #6c757d;
+}
+
+.button-group-item.success {
+  color: #28a745;
+}
+
+.button-group-item.danger {
+  color: #dc3545;
+}
+
+.button-group-item.warning {
+  color: #ffc107;
+}
+
+.button-group-item.info {
+  color: #17a2b8;
+}
+
+.button-group-item.light {
+  color: #f8f9fa;
+}
+
+.button-group-item.dark {
+  color: #343a40;
+}
+
+/* Состояния */
+.button-group-item:hover:not(.disabled) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.button-group-item.selected {
+  background-color: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+  font-weight: 500;
+}
+
+.button-group-item.disabled {
+  color: #adb5bd;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Иконки и бейджи */
+.button-group-icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.button-group-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Демо */
+.button-group-demo {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.button-group-demo h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.button-group-demo h3 {
+  color: #444;
+  margin: 30px 0 15px;
+  font-size: 18px;
+}
+
+/* Анимации */
+@keyframes buttonGroupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.button-group-item {
+  animation: buttonGroupFadeIn 0.3s ease;
+}
+
+/* Доступность */
+.button-group-item:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.button-group-item:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .button-group.horizontal {
+    flex-wrap: wrap;
+  }
+
+  .button-group-item {
+    flex: 1 1 auto;
+    min-width: 100px;
+  }
+} 
