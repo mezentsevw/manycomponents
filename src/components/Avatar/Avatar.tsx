@@ -1,49 +1,96 @@
 import React from 'react';
 import './Avatar.css';
 
-export interface AvatarProps {
+type AvatarSize = 'small' | 'medium' | 'large';
+type AvatarShape = 'circle' | 'square';
+type AvatarStatus = 'online' | 'offline' | 'away';
+
+interface AvatarProps {
   src?: string;
   alt?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  shape?: 'circle' | 'square';
-  status?: 'online' | 'offline' | 'away';
+  name?: string;
   initials?: string;
+  size?: AvatarSize;
+  shape?: AvatarShape;
+  status?: AvatarStatus;
   className?: string;
-  style?: React.CSSProperties;
   onClick?: () => void;
 }
 
-const Avatar: React.FC<AvatarProps> = ({
+export const Avatar: React.FC<AvatarProps> = ({
   src,
-  alt,
-  size = 'md',
+  alt = '',
+  name,
+  initials,
+  size = 'medium',
   shape = 'circle',
   status,
-  initials,
   className = '',
-  style,
-  onClick
+  onClick,
 }) => {
-  const renderContent = () => {
-    if (src) {
-      return <img src={src} alt={alt || 'Avatar'} />;
+  const getInitials = () => {
+    if (initials) return initials;
+    if (name) {
+      return name
+        .split(' ')
+        .map((word) => word[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
     }
-    if (initials) {
-      return <span className="avatar-initials">{initials}</span>;
-    }
-    return <span className="avatar-placeholder">?</span>;
+    return '';
   };
 
+  const getBackgroundColor = (str: string) => {
+    const colors = [
+      '#2196f3', // blue
+      '#4caf50', // green
+      '#ff9800', // orange
+      '#f44336', // red
+      '#9c27b0', // purple
+      '#00bcd4', // cyan
+      '#ffeb3b', // yellow
+      '#795548', // brown
+    ];
+    const index = str.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return colors[index % colors.length];
+  };
+
+  const avatarClasses = [
+    'avatar',
+    `avatar--${size}`,
+    `avatar--${shape}`,
+    status ? `avatar--${status}` : '',
+    className,
+  ].filter(Boolean).join(' ');
+
   return (
-    <div
-      className={`avatar ${size} ${shape} ${status ? `status-${status}` : ''} ${className}`}
-      style={style}
+    <div 
+      className={avatarClasses}
       onClick={onClick}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
-      {renderContent()}
-      {status && <span className="avatar-status" />}
+      {src ? (
+        <img src={src} alt={alt} className="avatar__image" />
+      ) : (name || initials) ? (
+        <div
+          className="avatar__initials"
+          style={{ backgroundColor: getBackgroundColor(name || initials || '') }}
+        >
+          {getInitials()}
+        </div>
+      ) : (
+        <div className="avatar__placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      )}
+      {status && <span className="avatar__status" />}
     </div>
   );
 };
@@ -58,27 +105,26 @@ export const AvatarDemo: React.FC = () => {
         <div className="avatar-demo-group">
           <h3>Размеры</h3>
           <div className="avatar-demo-row">
-            <Avatar size="sm" initials="JD" />
-            <Avatar size="md" initials="JD" />
-            <Avatar size="lg" initials="JD" />
-            <Avatar size="xl" initials="JD" />
+            <Avatar size="small" name="John Doe" />
+            <Avatar size="medium" name="John Doe" />
+            <Avatar size="large" name="John Doe" />
           </div>
         </div>
 
         <div className="avatar-demo-group">
           <h3>Формы</h3>
           <div className="avatar-demo-row">
-            <Avatar shape="circle" initials="JD" />
-            <Avatar shape="square" initials="JD" />
+            <Avatar shape="circle" name="John Doe" />
+            <Avatar shape="square" name="John Doe" />
           </div>
         </div>
 
         <div className="avatar-demo-group">
           <h3>Статусы</h3>
           <div className="avatar-demo-row">
-            <Avatar status="online" initials="JD" />
-            <Avatar status="offline" initials="JD" />
-            <Avatar status="away" initials="JD" />
+            <Avatar status="online" name="John Doe" />
+            <Avatar status="offline" name="John Doe" />
+            <Avatar status="away" name="John Doe" />
           </div>
         </div>
 
@@ -99,9 +145,9 @@ export const AvatarDemo: React.FC = () => {
         <div className="avatar-demo-group">
           <h3>Инициалы</h3>
           <div className="avatar-demo-row">
-            <Avatar initials="JD" />
+            <Avatar name="John Doe" />
             <Avatar initials="AB" />
-            <Avatar initials="CD" />
+            <Avatar name="Charlie Brown" />
           </div>
         </div>
       </div>

@@ -1,0 +1,145 @@
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.menu__trigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menu {
+  position: absolute;
+  min-width: 200px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: 8px 0;
+  animation: menuFadeIn 0.2s ease;
+}
+
+/* Позиционирование */
+.menu--bottom-start {
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+}
+
+.menu--bottom-end {
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+}
+
+.menu--top-start {
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 8px;
+}
+
+.menu--top-end {
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 8px;
+}
+
+/* Элементы меню */
+.menu__item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: none;
+}
+
+.menu__item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.menu__item:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.menu__item--disabled {
+  color: rgba(0, 0, 0, 0.38);
+  cursor: default;
+  pointer-events: none;
+}
+
+.menu__item-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.menu__divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.12);
+  margin: 8px 0;
+}
+
+/* Анимация */
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Демо-компонент */
+.menu-demo {
+  padding: 20px;
+}
+
+.menu-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.menu-demo h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.menu-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.menu-demo-group {
+  margin-bottom: 20px;
+}
+
+.menu-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.menu-demo-row button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2196f3;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu-demo-row button:hover {
+  background-color: #1976d2;
+} 

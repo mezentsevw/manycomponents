@@ -1,51 +1,55 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProgressBar.css';
 
+type ProgressBarType = 'primary' | 'success' | 'warning' | 'error';
+
 interface ProgressBarProps {
-  id?: string;
-  value?: number;
+  value: number;
   max?: number;
-  label?: string;
-  color?: string;
-  showPercentage?: boolean;
+  type?: ProgressBarType;
+  showLabel?: boolean;
   animated?: boolean;
-  children?: ReactNode;
+  className?: string;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ 
-  id, 
-  value = 0, 
-  max = 100, 
-  label,
-  color = '#4CAF50',
-  showPercentage = true,
+export const ProgressBar: React.FC<ProgressBarProps> = ({
+  value,
+  max = 100,
+  type = 'primary',
+  showLabel = false,
   animated = false,
-  children 
+  className = '',
 }) => {
-  const [currentValue, setCurrentValue] = useState(animated ? 0 : value);
-  const percentage = Math.min(100, Math.max(0, (currentValue / max) * 100));
+  const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     if (animated) {
-      const timer = setTimeout(() => {
-        setCurrentValue(value);
-      }, 300);
-      return () => clearTimeout(timer);
+      const interval = setInterval(() => {
+        setDisplayValue((prev) => {
+          if (prev >= value) {
+            clearInterval(interval);
+            return value;
+          }
+          return prev + 1;
+        });
+      }, 20);
+
+      return () => clearInterval(interval);
+    } else {
+      setDisplayValue(value);
     }
-  }, [animated, value]);
+  }, [value, animated]);
+
+  const percentage = Math.min(100, Math.max(0, (displayValue / max) * 100));
 
   return (
-    <div className="progress-container" id={id}>
-      <div className="progress-header">
-        {label && <div className="progress-label">{label}</div>}
-        {showPercentage && <div className="progress-percentage">{Math.round(percentage)}%</div>}
-      </div>
-      <div className="progress-bar">
-        {children || (
-          <div 
-            className={`progress-fill ${animated ? 'animated' : ''}`}
-            style={{ width: `${percentage}%`, backgroundColor: color }}
-          />
+    <div className={`progress-bar ${className}`}>
+      <div
+        className={`progress-bar__fill progress-bar__fill--${type}`}
+        style={{ width: `${percentage}%` }}
+      >
+        {showLabel && (
+          <span className="progress-bar__label">{Math.round(percentage)}%</span>
         )}
       </div>
     </div>
@@ -58,26 +62,22 @@ export const ProgressBarDemo: React.FC = () => {
     <div className="progress-bar-demo">
       <ProgressBar 
         value={75} 
-        label="Загрузка проекта" 
-        color="#2196F3"
+        type="primary"
         animated 
       />
       <ProgressBar 
         value={45} 
-        label="Память сервера" 
-        color="#FF9800"
+        type="success"
         animated 
       />
       <ProgressBar 
         value={90} 
-        label="Загрузка CPU" 
-        color="#F44336"
+        type="warning"
         animated 
       />
       <ProgressBar 
         value={30} 
-        label="Место на диске" 
-        color="#9C27B0"
+        type="error"
         animated 
       />
     </div>

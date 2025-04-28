@@ -1,0 +1,111 @@
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating__star {
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.rating__star--small {
+  font-size: 16px;
+}
+
+.rating__star--medium {
+  font-size: 24px;
+}
+
+.rating__star--large {
+  font-size: 32px;
+}
+
+.rating__star--filled {
+  color: currentColor;
+}
+
+.rating__star--half-filled::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: currentColor;
+}
+
+/* Варианты */
+.rating__star--primary {
+  color: #2196f3;
+}
+
+.rating__star--secondary {
+  color: #9c27b0;
+}
+
+.rating__star--success {
+  color: #4caf50;
+}
+
+.rating__star--warning {
+  color: #ff9800;
+}
+
+.rating__star--error {
+  color: #f44336;
+}
+
+/* Состояния */
+.rating--read-only .rating__star {
+  cursor: default;
+}
+
+.rating__star:focus {
+  outline: none;
+  transform: scale(1.1);
+}
+
+.rating__star:hover {
+  transform: scale(1.1);
+}
+
+/* Демо-компонент */
+.rating-demo {
+  padding: 20px;
+}
+
+.rating-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.rating-demo h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.rating-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.rating-demo-group {
+  margin-bottom: 20px;
+}
+
+.rating-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.rating-demo-value {
+  margin-left: 12px;
+  color: #666;
+} 

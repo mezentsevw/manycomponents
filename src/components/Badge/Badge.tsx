@@ -1,97 +1,60 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import './Badge.css';
 
-export type BadgeVariant = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info';
-export type BadgeSize = 'small' | 'medium' | 'large';
-export type BadgeShape = 'circle' | 'rounded' | 'square';
+type BadgeVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
+type BadgeSize = 'small' | 'medium' | 'large';
+type BadgeShape = 'circle' | 'square' | 'pill';
 
 interface BadgeProps {
-  id?: string;
-  content: string | number | ReactNode;
+  children: React.ReactNode;
   variant?: BadgeVariant;
   size?: BadgeSize;
   shape?: BadgeShape;
-  max?: number;
-  showZero?: boolean;
-  dot?: boolean;
-  offset?: [number, number];
   className?: string;
-  style?: React.CSSProperties;
   onClick?: () => void;
-  children?: ReactNode;
+  count?: number;
+  maxCount?: number;
+  dot?: boolean;
+  showZero?: boolean;
 }
 
-const Badge: React.FC<BadgeProps> = ({
-  id,
-  content,
-  variant = 'default',
+export const Badge: React.FC<BadgeProps> = ({
+  children,
+  variant = 'primary',
   size = 'medium',
   shape = 'circle',
-  max,
-  showZero = false,
-  dot = false,
-  offset,
   className = '',
-  style,
   onClick,
-  children
+  count,
+  maxCount = 99,
+  dot = false,
+  showZero = false,
 }) => {
-  const shouldShowBadge = showZero || (typeof content === 'number' ? content > 0 : true);
-
-  const formatContent = () => {
-    if (typeof content === 'number' && max && content > max) {
-      return `${max}+`;
-    }
-    return content;
-  };
-
-  const getOffsetStyle = () => {
-    if (!offset) return {};
-    return {
-      right: `${offset[0]}px`,
-      top: `${offset[1]}px`
-    };
-  };
-
-  if (!shouldShowBadge && !children) return null;
-
   const badgeClasses = [
     'badge',
-    `badge-${variant}`,
-    `badge-${size}`,
-    `badge-${shape}`,
-    dot ? 'badge-dot' : '',
-    className
+    `badge--${variant}`,
+    `badge--${size}`,
+    `badge--${shape}`,
+    className,
   ].filter(Boolean).join(' ');
 
-  const badgeContent = !dot ? formatContent() : null;
-
-  if (children) {
-    return (
-      <div className="badge-wrapper" id={id} style={style}>
-        {children}
-        {shouldShowBadge && (
-          <span 
-            className={badgeClasses}
-            style={getOffsetStyle()}
-            onClick={onClick}
-          >
-            {badgeContent}
-          </span>
-        )}
-      </div>
-    );
-  }
+  const shouldShowCount = count !== undefined && (count > 0 || showZero);
+  const displayCount = count && count > maxCount ? `${maxCount}+` : count;
 
   return (
-    <span 
-      className={badgeClasses}
-      id={id}
-      style={style}
-      onClick={onClick}
-    >
-      {badgeContent}
-    </span>
+    <div className="badge-wrapper">
+      {children}
+      {(shouldShowCount || dot) && (
+        <span 
+          className={badgeClasses}
+          onClick={onClick}
+          role={onClick ? 'button' : undefined}
+          tabIndex={onClick ? 0 : undefined}
+        >
+          {!dot && displayCount}
+        </span>
+      )}
+    </div>
   );
 };
 
@@ -100,67 +63,55 @@ export const BadgeDemo: React.FC = () => {
   return (
     <div className="badge-demo">
       <h2>Примеры использования Badge</h2>
+      
+      <div className="badge-demo-grid">
+        <div className="badge-demo-group">
+          <h3>Варианты</h3>
+          <div className="badge-demo-row">
+            <Badge variant="primary">Primary</Badge>
+            <Badge variant="secondary">Secondary</Badge>
+            <Badge variant="success">Success</Badge>
+            <Badge variant="danger">Danger</Badge>
+            <Badge variant="warning">Warning</Badge>
+            <Badge variant="info">Info</Badge>
+          </div>
+        </div>
 
-      <h3>Базовые варианты</h3>
-      <div className="badge-demo-row">
-        <Badge content="Default" />
-        <Badge content="Primary" variant="primary" />
-        <Badge content="Success" variant="success" />
-        <Badge content="Warning" variant="warning" />
-        <Badge content="Error" variant="error" />
-        <Badge content="Info" variant="info" />
-      </div>
+        <div className="badge-demo-group">
+          <h3>Размеры</h3>
+          <div className="badge-demo-row">
+            <Badge size="small">Small</Badge>
+            <Badge size="medium">Medium</Badge>
+            <Badge size="large">Large</Badge>
+          </div>
+        </div>
 
-      <h3>Размеры</h3>
-      <div className="badge-demo-row">
-        <Badge content="Small" size="small" />
-        <Badge content="Medium" size="medium" />
-        <Badge content="Large" size="large" />
-      </div>
+        <div className="badge-demo-group">
+          <h3>Формы</h3>
+          <div className="badge-demo-row">
+            <Badge shape="circle">Circle</Badge>
+            <Badge shape="square">Square</Badge>
+            <Badge shape="pill">Pill</Badge>
+          </div>
+        </div>
 
-      <h3>Формы</h3>
-      <div className="badge-demo-row">
-        <Badge content="Circle" shape="circle" />
-        <Badge content="Rounded" shape="rounded" />
-        <Badge content="Square" shape="square" />
-      </div>
+        <div className="badge-demo-group">
+          <h3>Счетчики</h3>
+          <div className="badge-demo-row">
+            <Badge count={5}>Уведомления</Badge>
+            <Badge count={100} maxCount={99}>Сообщения</Badge>
+            <Badge count={0} showZero>Задачи</Badge>
+          </div>
+        </div>
 
-      <h3>Счетчики</h3>
-      <div className="badge-demo-row">
-        <Badge content={5} />
-        <Badge content={99} max={99} />
-        <Badge content={0} showZero />
-        <Badge content={0} />
-      </div>
-
-      <h3>Точки</h3>
-      <div className="badge-demo-row">
-        <Badge dot />
-        <Badge dot variant="primary" />
-        <Badge dot variant="success" />
-      </div>
-
-      <h3>С иконками</h3>
-      <div className="badge-demo-row">
-        <Badge content="🔔">
-          <span className="icon">🔔</span>
-        </Badge>
-        <Badge content="📧">
-          <span className="icon">📧</span>
-        </Badge>
-        <Badge content="❤️">
-          <span className="icon">❤️</span>
-        </Badge>
-      </div>
-
-      <h3>Смещение</h3>
-      <div className="badge-demo-row">
-        <Badge content={5} offset={[10, 10]}>
-          <span className="icon">🔔</span>
-        </Badge>
-        <Badge content={3} offset={[-5, 5]}>
-          <span className="icon">📧</span>
-        </Badge>
+        <div className="badge-demo-group">
+          <h3>Точки</h3>
+          <div className="badge-demo-row">
+            <Badge dot>Новые</Badge>
+            <Badge dot variant="success">Активные</Badge>
+            <Badge dot variant="danger">Важные</Badge>
+          </div>
+        </div>
       </div>
     </div>
   );

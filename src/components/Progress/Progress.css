@@ -1,0 +1,182 @@
+.progress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Линейный прогресс */
+.progress--line {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress__bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Круговой прогресс */
+.progress--circle {
+  width: 100%;
+  height: 100%;
+}
+
+.progress__circle {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress__circle-bg {
+  fill: none;
+  stroke: #f5f5f5;
+}
+
+.progress__circle-bar {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+/* Варианты */
+.progress__bar--primary,
+.progress__circle-bar--primary {
+  background-color: #2196f3;
+  stroke: #2196f3;
+}
+
+.progress__bar--secondary,
+.progress__circle-bar--secondary {
+  background-color: #9e9e9e;
+  stroke: #9e9e9e;
+}
+
+.progress__bar--success,
+.progress__circle-bar--success {
+  background-color: #4caf50;
+  stroke: #4caf50;
+}
+
+.progress__bar--danger,
+.progress__circle-bar--danger {
+  background-color: #f44336;
+  stroke: #f44336;
+}
+
+.progress__bar--warning,
+.progress__circle-bar--warning {
+  background-color: #ff9800;
+  stroke: #ff9800;
+}
+
+.progress__bar--info,
+.progress__circle-bar--info {
+  background-color: #00bcd4;
+  stroke: #00bcd4;
+}
+
+/* Размеры */
+.progress--small {
+  height: 4px;
+  font-size: 12px;
+}
+
+.progress--medium {
+  height: 6px;
+  font-size: 14px;
+}
+
+.progress--large {
+  height: 8px;
+  font-size: 16px;
+}
+
+.progress--circle.progress--small {
+  width: 40px;
+  height: 40px;
+}
+
+.progress--circle.progress--medium {
+  width: 60px;
+  height: 60px;
+}
+
+.progress--circle.progress--large {
+  width: 80px;
+  height: 80px;
+}
+
+/* Информация */
+.progress__info {
+  margin-left: 8px;
+  color: #666;
+  font-weight: 500;
+}
+
+.progress--circle .progress__info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+/* Демо-компонент */
+.progress-demo {
+  padding: 20px;
+}
+
+.progress-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.progress-demo h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.progress-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.progress-demo-group {
+  margin-bottom: 20px;
+}
+
+.progress-demo-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Анимации */
+@keyframes progressPulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.progress__bar {
+  animation: progressPulse 1.5s ease-in-out infinite;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .progress-demo-row {
+    flex-wrap: wrap;
+  }
+} 

@@ -1,6 +1,47 @@
 # Modal
 
-Компонент модального окна с поддержкой различных размеров, заголовков и действий.
+Компонент модального окна с поддержкой закрытия по клику вне окна и клавише Escape.
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| isOpen | boolean | Yes | - | Состояние модального окна |
+| onClose | () => void | Yes | - | Обработчик закрытия модального окна |
+| title | string | No | - | Заголовок модального окна |
+| children | React.ReactNode | Yes | - | Содержимое модального окна |
+| className | string | No | - | Дополнительные CSS классы |
+
+## Usage
+
+```tsx
+import { Modal } from './components/Modal';
+
+// Пример использования
+const [isModalOpen, setIsModalOpen] = useState(false);
+
+<Modal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  title="Заголовок модального окна"
+>
+  <div>
+    <p>Содержимое модального окна</p>
+    <button onClick={() => setIsModalOpen(false)}>Закрыть</button>
+  </div>
+</Modal>
+```
+
+## Особенности
+
+- Плавная анимация появления/исчезновения
+- Закрытие по клику вне окна
+- Закрытие по клавише Escape
+- Блокировка прокрутки фонового контента
+- Адаптивный дизайн
+- Поддержка любого контента внутри окна
+- Кастомный заголовок
+- Стилизация через CSS классы
 
 ## Использование
 
@@ -35,20 +76,6 @@ const [isOpen, setIsOpen] = useState(false);
   <p>Содержимое модального окна</p>
 </Modal>
 ```
-
-## Props
-
-| Prop | Тип | По умолчанию | Описание |
-|------|-----|--------------|-----------|
-| isOpen | boolean | - | Состояние открытия модального окна |
-| onClose | () => void | - | Обработчик закрытия модального окна |
-| title | string | - | Заголовок модального окна |
-| children | React.ReactNode | - | Содержимое модального окна |
-| footer | React.ReactNode | - | Действия внизу модального окна |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | Размер модального окна |
-| closeOnOverlayClick | boolean | true | Закрывать при клике на оверлей |
-| closeOnEscape | boolean | true | Закрывать при нажатии Escape |
-| className | string | - | Дополнительные CSS классы |
 
 ## Примеры
 

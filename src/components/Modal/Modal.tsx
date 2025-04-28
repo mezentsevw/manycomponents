@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Modal.css';
 
 export interface ModalProps {
@@ -24,9 +24,11 @@ const Modal: React.FC<ModalProps> = ({
   closeOnEscape = true,
   className = ''
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && closeOnEscape) {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && closeOnEscape) {
         onClose();
       }
     };
@@ -38,17 +40,23 @@ const Modal: React.FC<ModalProps> = ({
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = '';
+      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose, closeOnEscape]);
+
+  const handleClickOutside = (event: React.MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      onClose();
+    }
+  };
 
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={closeOnOverlayClick ? onClose : undefined}>
+    <div className="modal-overlay" onClick={handleClickOutside}>
       <div
+        ref={modalRef}
         className={`modal ${size} ${className}`}
-        onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}

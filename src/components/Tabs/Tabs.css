@@ -1,0 +1,146 @@
+.tabs {
+  display: flex;
+  width: 100%;
+}
+
+/* Ориентация */
+.tabs--horizontal {
+  flex-direction: column;
+}
+
+.tabs--vertical {
+  flex-direction: row;
+}
+
+/* Заголовок вкладок */
+.tabs__header {
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabs--vertical .tabs__header {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: 1px solid #e0e0e0;
+  min-width: 200px;
+}
+
+/* Вкладка */
+.tabs__tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabs__tab:hover {
+  color: #333;
+}
+
+.tabs__tab--active {
+  color: #2196f3;
+}
+
+.tabs__tab--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Иконка */
+.tabs__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Варианты */
+.tabs--default .tabs__tab--active {
+  border-bottom: 2px solid #2196f3;
+}
+
+.tabs--vertical.tabs--default .tabs__tab--active {
+  border-bottom: none;
+  border-right: 2px solid #2196f3;
+}
+
+.tabs--pills .tabs__tab {
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.tabs--pills .tabs__tab--active {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.tabs--underline .tabs__tab {
+  border-bottom: 2px solid transparent;
+}
+
+.tabs--underline .tabs__tab--active {
+  border-bottom-color: #2196f3;
+}
+
+/* Контент */
+.tabs__content {
+  flex: 1;
+  padding: 16px;
+}
+
+/* Демо-компонент */
+.tabs-demo {
+  padding: 20px;
+}
+
+.tabs-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.tabs-demo h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.tabs-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.tabs-demo-group {
+  margin-bottom: 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .tabs--vertical {
+    flex-direction: column;
+  }
+
+  .tabs--vertical .tabs__header {
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    min-width: auto;
+    overflow-x: auto;
+  }
+
+  .tabs--vertical.tabs--default .tabs__tab--active {
+    border-right: none;
+    border-bottom: 2px solid #2196f3;
+  }
+} 

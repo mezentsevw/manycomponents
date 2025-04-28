@@ -1,69 +1,70 @@
-# ProgressBar Component
+# ProgressBar
 
-## Описание
-Компонент ProgressBar отображает прогресс выполнения задачи в виде индикатора. Поддерживает различные уровни детализации и кастомизации.
+Компонент индикатора прогресса с поддержкой разных типов и анимации.
 
-## Аргументы
-- `id` (string, опционально) - уникальный идентификатор
-- `value` (number, опционально) - текущее значение прогресса
-- `max` (number, опционально) - максимальное значение
-- `label` (string, опционально) - текстовая метка
-- `children` (ReactNode, опционально) - кастомное содержимое
+## Props
 
-## Примеры использования
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| value | number | Yes | - | Текущее значение прогресса |
+| max | number | No | 100 | Максимальное значение прогресса |
+| type | 'primary' \| 'success' \| 'warning' \| 'error' | No | 'primary' | Тип индикатора прогресса |
+| showLabel | boolean | No | false | Показывать ли процентное значение |
+| animated | boolean | No | false | Включить анимацию изменения значения |
+| className | string | No | - | Дополнительные CSS классы |
 
-### Уровень 0: Базовая версия
-```jsx
-<ProgressBar id="progress-1" />
+## Usage
+
+```tsx
+import { ProgressBar } from './components/ProgressBar';
+
+// Пример использования
+<ProgressBar
+  value={75}
+  type="primary"
+  showLabel
+  animated
+/>
 ```
 
-### Уровень 1: С базовыми параметрами
-```jsx
-<ProgressBar value={50} max={100} />
+## Примеры типов индикаторов
+
+```tsx
+// Основной
+<ProgressBar
+  value={75}
+  type="primary"
+  showLabel
+/>
+
+// Успех
+<ProgressBar
+  value={75}
+  type="success"
+  showLabel
+/>
+
+// Предупреждение
+<ProgressBar
+  value={75}
+  type="warning"
+  showLabel
+/>
+
+// Ошибка
+<ProgressBar
+  value={75}
+  type="error"
+  showLabel
+/>
 ```
 
-### Уровень 2: С меткой
-```jsx
-<ProgressBar>
-  <ProgressLabel text="Загрузка" />
-  <ProgressTrack />
-</ProgressBar>
-```
+## Особенности
 
-### Уровень 3: С кастомным стилем
-```jsx
-<ProgressBar>
-  <ProgressLabel text="Загрузка" />
-  <ProgressTrack>
-    <ProgressFill value={75} color="blue" />
-  </ProgressTrack>
-</ProgressBar>
-```
-
-### Уровень 4: Полная кастомизация
-```jsx
-<ProgressBar>
-  <ProgressLabel>
-    <Text>Загрузка</Text>
-    <Percentage value={75} />
-  </ProgressLabel>
-  <ProgressTrack>
-    <ProgressFill>
-      <GradientFill startColor="#ff0000" endColor="#00ff00" />
-      <ProgressText value={75} />
-    </ProgressFill>
-  </ProgressTrack>
-</ProgressBar>
-```
-
-## Когда использовать
-- Для отображения прогресса загрузки
-- При показе выполнения длительных операций
-- Для визуализации статистики
-
-## Настройка верстки
-Компонент поддерживает:
-- Различные уровни детализации
-- Кастомизацию через CSS
-- Анимации и переходы
-- Кастомные элементы внутри 
+- 4 типа индикаторов (primary, success, warning, error)
+- Поддержка анимации изменения значения
+- Отображение процентного значения
+- Плавные переходы при изменении значения
+- Адаптивный дизайн
+- Кастомные цвета для разных типов
+- Поддержка максимального значения 

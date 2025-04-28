@@ -1,0 +1,158 @@
+.stepper {
+  display: flex;
+  width: 100%;
+}
+
+/* Ориентация */
+.stepper--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.stepper--vertical {
+  flex-direction: column;
+}
+
+/* Шаг */
+.stepper__step {
+  position: relative;
+  flex: 1;
+}
+
+.stepper__step--clickable {
+  cursor: pointer;
+}
+
+.stepper__step-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* Иконка */
+.stepper__step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.stepper__step-number {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Информация */
+.stepper__step-info {
+  flex: 1;
+}
+
+.stepper__step-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.stepper__step-description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Соединитель */
+.stepper__connector {
+  position: absolute;
+  background-color: #e0e0e0;
+}
+
+.stepper--horizontal .stepper__connector {
+  top: 15px;
+  left: 32px;
+  right: -32px;
+  height: 2px;
+}
+
+.stepper--vertical .stepper__connector {
+  left: 15px;
+  top: 32px;
+  bottom: -32px;
+  width: 2px;
+}
+
+/* Состояния */
+.stepper__step--completed .stepper__step-icon {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.stepper__step--completed .stepper__connector {
+  background-color: #4caf50;
+}
+
+.stepper__step--active .stepper__step-icon {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.stepper__step--active .stepper__connector {
+  background-color: #e0e0e0;
+}
+
+.stepper__step--pending .stepper__step-icon {
+  background-color: #e0e0e0;
+  color: #666;
+}
+
+.stepper__step--pending .stepper__connector {
+  background-color: #e0e0e0;
+}
+
+/* Демо-компонент */
+.stepper-demo {
+  padding: 20px;
+}
+
+.stepper-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.stepper-demo h3 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.stepper-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.stepper-demo-group {
+  margin-bottom: 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .stepper--horizontal {
+    flex-direction: column;
+  }
+
+  .stepper--horizontal .stepper__connector {
+    left: 15px;
+    top: 32px;
+    bottom: -32px;
+    width: 2px;
+    right: auto;
+  }
+
+  .stepper__step-content {
+    width: 100%;
+  }
+} 
