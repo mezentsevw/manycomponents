@@ -1,0 +1,97 @@
+.code-editor {
+  display: flex;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.code-editor--light {
+  background-color: #fff;
+  color: #333;
+}
+
+.code-editor--dark {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+
+.code-editor__line-numbers {
+  padding: 8px 4px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #d9d9d9;
+  text-align: right;
+  user-select: none;
+  min-width: 40px;
+}
+
+.code-editor--dark .code-editor__line-numbers {
+  background-color: #252526;
+  border-right-color: #333;
+  color: #858585;
+}
+
+.code-editor__line-number {
+  padding: 0 4px;
+}
+
+.code-editor__content {
+  flex: 1;
+  padding: 8px;
+  outline: none;
+  white-space: pre;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.code-editor__content[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: #999;
+}
+
+/* Подсветка синтаксиса */
+.code-editor__content[data-language="javascript"],
+.code-editor__content[data-language="typescript"] {
+  color: #333;
+}
+
+.code-editor--dark .code-editor__content[data-language="javascript"],
+.code-editor--dark .code-editor__content[data-language="typescript"] {
+  color: #d4d4d4;
+}
+
+/* Демо-компонент */
+.code-editor-demo {
+  padding: 20px;
+}
+
+.code-editor-demo h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.code-editor-demo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.code-editor-demo__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.code-editor-demo__item h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .code-editor-demo__grid {
+    grid-template-columns: 1fr;
+  }
+} 

@@ -1,0 +1,124 @@
+.rich-text-editor {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.rich-text-editor--focused {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.rich-text-editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  background: #f8f9fa;
+}
+
+.rich-text-editor__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rich-text-editor__button:hover {
+  background: #e9ecef;
+}
+
+.rich-text-editor__button:active {
+  background: #dee2e6;
+}
+
+.rich-text-editor__content {
+  min-height: 200px;
+  max-height: 500px;
+  padding: 16px;
+  overflow-y: auto;
+  outline: none;
+}
+
+.rich-text-editor__content[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: #999;
+}
+
+.rich-text-editor__content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.rich-text-editor__content a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.rich-text-editor__content a:hover {
+  text-decoration: underline;
+}
+
+/* Стили для демо-компонента */
+.rich-text-editor-demo {
+  padding: 24px;
+}
+
+.rich-text-editor-demo h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 24px;
+}
+
+.rich-text-editor-demo__preview {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.rich-text-editor-demo__preview h3 {
+  margin-bottom: 16px;
+  color: #444;
+  font-size: 18px;
+}
+
+.rich-text-editor-demo__preview pre {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .rich-text-editor__toolbar {
+    padding: 4px;
+  }
+
+  .rich-text-editor__button {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    font-size: 12px;
+  }
+
+  .rich-text-editor__content {
+    min-height: 150px;
+    padding: 12px;
+  }
+} 

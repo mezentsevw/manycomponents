@@ -2,6 +2,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  background-color: var(--bg-color);
 }
 
 .logo {
@@ -47,19 +48,21 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
+  background-color: var(--bg-color);
 }
 
 .app-header {
   width: 100%;
   padding: 1rem 2rem;
-  background-color: #f8f9fa;
+  background-color: var(--card-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--card-border);
 }
 
 .app-header h1 {
   margin: 0;
   font-size: 1.5rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .component-nav {
@@ -92,7 +95,7 @@
   flex: 1;
   width: 100%;
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
 }
@@ -100,4 +103,74 @@
 /* Удаляем неиспользуемые стили */
 .logo, .read-the-docs, .card {
   display: none;
+}
+
+:root {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --card-bg: #2d2d2d;
+  --card-border: #404040;
+  --control-bg: #333333;
+  --control-border: #404040;
+  --hover-color: #404040;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.app-header h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.component-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.component-nav button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--control-border);
+  background-color: var(--control-bg);
+  color: var(--text-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.component-nav button:hover {
+  background-color: var(--hover-color);
+}
+
+.component-nav button.active {
+  background-color: #2196F3;
+  border-color: #1976D2;
+}
+
+.app-main {
+  flex: 1;
+  padding: 1rem;
+  background-color: var(--bg-color);
 }

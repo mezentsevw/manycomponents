@@ -1,114 +1,96 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import './CardList.css';
 
-interface CardItem {
+export interface CardItem {
   id: string;
-  title: string;
-  content: string;
+  balance?: number;
   icon?: string;
-  meta?: string;
 }
 
-interface CardListProps {
+export interface CardProps {
+  id?: string;
+  balance?: number;
+  icon?: string;
+  children?: React.ReactNode;
+}
+
+export interface CardListProps {
   id?: string;
   cardItems?: CardItem[];
-  children?: ReactNode;
+  children?: React.ReactNode;
+  level?: 0 | 1 | 2 | 3 | 4;
 }
 
-const CardList: React.FC<CardListProps> = ({ id, cardItems = defaultCards, children }) => {
-  // Логирование для отладки
-  useEffect(() => {
-    console.log('CardList render:', { cardItems, defaultCards });
-  }, [cardItems]);
-
-  // Если есть children, отображаем их
+const Card: React.FC<CardProps> = ({ id, balance, icon, children }) => {
   if (children) {
+    return <div className="card">{children}</div>;
+  }
+
+  return (
+    <div className="card">
+      {balance !== undefined && <div className="card__balance">{balance}</div>}
+      {icon && <div className="card__icon">{icon}</div>}
+    </div>
+  );
+};
+
+const CardList: React.FC<CardListProps> = ({ id, cardItems, children, level = 0 }) => {
+  // Уровень 0: только id
+  if (level === 0) {
+    return <div className="card-list" id={id} />;
+  }
+
+  // Уровень 1: массив cardItems
+  if (level === 1 && cardItems) {
     return (
       <div className="card-list" id={id}>
-        {children}
+        {cardItems.map((item) => (
+          <Card key={item.id} id={item.id} />
+        ))}
       </div>
     );
   }
 
-  // Иначе рендерим карточки из переданных данных или дефолтных
+  // Уровень 2: дети с id
+  if (level === 2) {
+    return (
+      <div className="card-list" id={id}>
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement<CardProps>(child) && child.type === Card) {
+            return React.cloneElement(child, { id: child.props.id || '' } as CardProps);
+          }
+          return child;
+        })}
+      </div>
+    );
+  }
+
+  // Уровень 3: дети с balance и icon
+  if (level === 3) {
+    return (
+      <div className="card-list" id={id}>
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement<CardProps>(child) && child.type === Card) {
+            return React.cloneElement(child, {
+              balance: child.props.balance,
+              icon: child.props.icon,
+            } as CardProps);
+          }
+          return child;
+        })}
+      </div>
+    );
+  }
+
+  // Уровень 4: полная структура с Balance и Icon
   return (
     <div className="card-list" id={id}>
-      {cardItems.map((item) => (
-        <div key={item.id} className="card">
-          <div className="card-header">
-            <div className="card-icon">{item.icon || '📊'}</div>
-            <h3 className="card-title">{item.title}</h3>
-          </div>
-          <div className="card-content">
-            {item.content}
-          </div>
-          <div className="card-footer">
-            <div className="card-meta">{item.meta || 'Обновлено сегодня'}</div>
-            <div className="card-actions">
-              <button className="card-button">Подробнее</button>
-            </div>
-          </div>
-        </div>
-      ))}
+      {children}
     </div>
   );
 };
 
-// Тестовые данные для демонстрации
-const defaultCards: CardItem[] = [
-  {
-    id: '1',
-    title: 'Аналитика продаж',
-    content: 'Анализ продаж за последний квартал показывает рост на 15% по сравнению с предыдущим периодом.',
-    icon: '📈',
-    meta: 'Последнее обновление: вчера'
-  },
-  {
-    id: '2',
-    title: 'Клиентская база',
-    content: 'В этом месяце к нам присоединилось 120 новых клиентов, что на 30% больше, чем в прошлом месяце.',
-    icon: '👥',
-    meta: 'Обновлено 2 дня назад'
-  },
-  {
-    id: '3',
-    title: 'Проекты в разработке',
-    content: 'У нас сейчас 5 активных проектов. 3 из них будут завершены в следующем месяце.',
-    icon: '🚀',
-    meta: 'Статус: В процессе'
-  },
-  {
-    id: '4',
-    title: 'Финансовый отчет',
-    content: 'Доходы выросли на 12%, а расходы уменьшились на 5% благодаря оптимизации процессов.',
-    icon: '💰',
-    meta: 'Квартал 2, 2023'
-  }
-];
-
-// Статический компонент для демонстрации
-export const CardListDemo: React.FC = () => {
-  return (
-    <div className="card-list">
-      {defaultCards.map((item) => (
-        <div key={item.id} className="card">
-          <div className="card-header">
-            <div className="card-icon">{item.icon}</div>
-            <h3 className="card-title">{item.title}</h3>
-          </div>
-          <div className="card-content">
-            {item.content}
-          </div>
-          <div className="card-footer">
-            <div className="card-meta">{item.meta}</div>
-            <div className="card-actions">
-              <button className="card-button">Подробнее</button>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+// Экспортируем Card для использования в демо
+export { Card };
 
 export default CardList; 

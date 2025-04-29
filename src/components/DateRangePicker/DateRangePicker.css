@@ -1,0 +1,226 @@
+.date-range-picker {
+  position: relative;
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.date-range-picker__input {
+  display: flex;
+  align-items: center;
+  min-width: 240px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.date-range-picker__input:hover {
+  border-color: #999;
+}
+
+.date-range-picker--disabled .date-range-picker__input {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.date-range-picker__placeholder {
+  color: #999;
+}
+
+.date-range-picker__popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.date-range-picker__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.date-range-picker__preset {
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-range-picker__preset:hover {
+  border-color: #999;
+  background: #f5f5f5;
+}
+
+.date-range-picker__calendar {
+  width: 280px;
+}
+
+.date-range-picker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.date-range-picker__month {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.date-range-picker__nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.date-range-picker__nav-button:hover {
+  color: #333;
+}
+
+.date-range-picker__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.date-range-picker__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  color: #666;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.date-range-picker__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.date-range-picker__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border-radius: 4px;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-range-picker__day:hover {
+  background: #f5f5f5;
+}
+
+.date-range-picker__day--empty {
+  visibility: hidden;
+}
+
+.date-range-picker__day--disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.date-range-picker__day--disabled:hover {
+  background: transparent;
+}
+
+.date-range-picker__day--start,
+.date-range-picker__day--end {
+  background: #2196f3;
+  color: #fff;
+}
+
+.date-range-picker__day--in-range {
+  background: rgba(33, 150, 243, 0.1);
+}
+
+.date-range-picker__day--hovered {
+  background: rgba(33, 150, 243, 0.2);
+}
+
+/* Стили для демо-компонента */
+.date-range-picker-demo {
+  padding: 24px;
+}
+
+.date-range-picker-demo h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 24px;
+}
+
+.date-range-picker-demo__preview {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.date-range-picker-demo__preview h3 {
+  margin-bottom: 16px;
+  color: #444;
+  font-size: 18px;
+}
+
+.date-range-picker-demo__preview pre {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .date-range-picker__popover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 320px;
+    margin: 0;
+  }
+
+  .date-range-picker__calendar {
+    width: 100%;
+  }
+
+  .date-range-picker__day {
+    height: 40px;
+    font-size: 16px;
+  }
+} 
