@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './DemoPanel.css';
-import CardList from '../CardList/CardList';
 import { CardListDemo } from '../CardList/CardListDemo';
 import ProgressBar, { ProgressBarDemo } from '../ProgressBar/ProgressBar';
+import { ProgressBarDemoComplex } from '../ProgressBar/ProgressBarDemoComplex';
 import DataTable, { DataTableDemo } from '../DataTable/DataTable';
 import Notification, { NotificationDemo } from '../Notification/Notification';
 import Chart, { ChartDemo } from '../Chart/Chart';
@@ -12,14 +12,24 @@ interface DemoPanelProps {
 }
 
 const DemoPanel: React.FC<DemoPanelProps> = ({ componentType }) => {
-  const [detailLevel, setDetailLevel] = useState<0 | 1 | 2 | 3 | 4>(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    console.log('DemoPanel смонтирован, текущий компонент:', componentType);
+    setMounted(true);
+    return () => {
+      setMounted(false);
+      console.log('DemoPanel размонтирован');
+    };
+  }, [componentType]);
 
   const renderComponent = () => {
+    console.log('Рендеринг компонента:', componentType);
     switch (componentType) {
       case 'CardList':
-        return <CardListDemo detailLevel={detailLevel} />;
+        return <CardListDemo />;
       case 'ProgressBar':
-        return <ProgressBarDemo />;
+        return <ProgressBarDemoComplex />;
       case 'DataTable':
         return <DataTableDemo />;
       case 'Notification':
@@ -27,26 +37,29 @@ const DemoPanel: React.FC<DemoPanelProps> = ({ componentType }) => {
       case 'Chart':
         return <ChartDemo />;
       default:
-        return null;
+        return <div className="error-message">Неизвестный компонент: {componentType}</div>;
     }
   };
 
+  const panelStyles = {
+    padding: '20px',
+    margin: '20px',
+    borderRadius: '10px',
+    backgroundColor: '#1a1a1a',
+    color: 'white'
+  };
+
   return (
-    <div className="demo-panel">
+    <div className="demo-panel" style={panelStyles}>
       <div className="demo-controls">
-        <div className="control-group">
-          <label htmlFor="detailLevel">Уровень детализации:</label>
-          <input
-            type="range"
-            id="detailLevel"
-            min="0"
-            max="4"
-            value={detailLevel}
-            onChange={(e) => setDetailLevel(Number(e.target.value) as 0 | 1 | 2 | 3 | 4)}
-          />
-          <span>{detailLevel}</span>
+        <div className="component-info">
+          Текущий компонент: <b>{componentType}</b>
+          <span style={{ marginLeft: '10px', color: mounted ? 'green' : 'red' }}>
+            {mounted ? '✅ Активен' : '❌ Не активен'}
+          </span>
         </div>
       </div>
+      
       <div className="demo-content">
         {renderComponent()}
       </div>

@@ -207,4 +207,17 @@
 .component-placeholder p {
   color: #666;
   margin: 0.5rem 0;
+}
+
+.component-info {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.component-info b {
+  color: #2196F3;
+  font-weight: bold;
 } 
