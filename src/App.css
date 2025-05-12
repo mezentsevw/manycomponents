@@ -42,62 +42,37 @@
 }
 
 .app {
-  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
 }
 
 .app-header {
-  width: 100%;
-  padding: 1rem 2rem;
   background-color: var(--card-bg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid var(--card-border);
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 1.5rem;
-  color: var(--text-color);
+  font-size: 24px;
 }
 
-.component-nav {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
+.component-status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ccc;
 }
 
-.component-nav button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #e9ecef;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  min-width: 120px;
-}
-
-.component-nav button:hover {
-  background-color: #dee2e6;
-}
-
-.component-nav button.active {
-  background-color: #2196F3;
-  color: white;
-}
-
-.app-main {
+.app-content {
   flex: 1;
-  width: 100%;
-  padding: 2rem;
-  background-color: var(--bg-color);
+  padding: 20px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Удаляем неиспользуемые стили */
@@ -124,12 +99,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
   color: var(--text-color);
-}
-
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 .app-header {
