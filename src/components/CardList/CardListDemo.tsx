@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import CardList from './CardList';
-import Card from './Card';
-import { Balance } from './Balance';
-import { Icon } from './Icon';
 import './CardList.css';
 
 /**
@@ -12,7 +9,7 @@ export const CardListDemo: React.FC = () => {
   const [selectedCardId, setSelectedCardId] = useState<string | undefined>();
   const [detailLevel, setDetailLevel] = useState<number>(2); // Начинаем со стандартного уровня
 
-  useEffect(() => {
+  useEffect(() => { 
     console.log('CardListDemo компонент смонтирован, текущий уровень детализации:', detailLevel);
     return () => {
       console.log('CardListDemo компонент размонтирован');
@@ -55,17 +52,17 @@ export const CardListDemo: React.FC = () => {
   const getDetailLevelCode = () => {
     switch (detailLevel) {
       case 0:
-        return "&lt;CardList id=\"my-card-list\" /&gt;";
+        return "<CardList id=\"my-card-list\" />";
       case 1:
-        return "&lt;CardList cardItems={[{ id: \"1\" }, { id: \"2\" }]} /&gt;";
+        return "<CardList cardItems={[{ id: \"1\" }, { id: \"2\" }]} />";
       case 2:
-        return "&lt;CardList&gt;\n  &lt;Card id=\"card-1\" /&gt;\n  &lt;Card id=\"card-2\" /&gt;\n&lt;/CardList&gt;";
+        return "<CardList>\n  <Card id=\"card-1\" />\n  <Card id=\"card-2\" />\n</CardList>";
       case 3:
-        return "&lt;CardList cardItems={[{ id: \"1\", balance: 5000, icon: \"💰\" }]} /&gt;";
+        return "<CardList cardItems={[{ id: \"1\", balance: 5000, icon: \"💰\" }]} />";
       case 4:
-        return "&lt;CardList&gt;\n  &lt;Card id=\"card-1\"&gt;\n    &lt;Balance value={8500} /&gt;\n    &lt;Icon name=\"💰\" /&gt;\n  &lt;/Card&gt;\n&lt;/CardList&gt;";
+        return "<CardList>\n  <Card id=\"card-1\">\n    <Balance value={8500} />\n    <Icon name=\"💰\" />\n  </Card>\n</CardList>";
       default:
-        return "&lt;CardList /&gt;";
+        return "<CardList />";
     }
   };
 
